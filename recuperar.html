@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recover Password</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:#FAF7F3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.box{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  width:300px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+button{
+  padding:10px;
+  width:100%;
+  background:#0B3C5D;
+  color:white;
+  border:none;
+}
+
+#result{
+  margin-top:15px;
+  color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Recover Password</h2>
+
+  <input type="email" id="correo" placeholder="Enter your email">
+
+  <button onclick="recuperar()">Recover</button>
+
+  <p id="result"></p>
+
+  <a href="login.html">Back to login</a>
+</div>
+
+<script src="usuarios.js"></script>
+
+<script>
+function recuperar(){
+  const correo = document.getElementById("correo").value;
+  const result = document.getElementById("result");
+
+  const usuario = usuarios.find(u => u.correo === correo);
+
+  if(usuario){
+    result.innerHTML = "Sending email...";
+    
+    setTimeout(() => {
+      result.innerHTML = `
+      Hello ${usuario.nombre},<br><br>
+
+      📧 Email sent successfully! <br><br>
+
+        <strong>To:</strong> ${usuario.correo} <br>
+        <strong>Subject:</strong> Password Recovery <br><br>
+
+        
+        Please keep your information secure.<br><br>
+
+        — Berkshire Hathaway Support
+      `;
+    }, 2000);
+
+  } else {
+    result.textContent = "Email not found";
+  }
+}
+</script>
+
+</body>
+</html>

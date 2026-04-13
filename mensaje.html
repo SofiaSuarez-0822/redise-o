@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Message From Warren E. Buffett | Berkshire Hathaway Inc.</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    #translateBtn {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  background: #D9B310;
+  color: #0B3C5D;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+    :root{
+      --navy:#0B3C5D;
+      --gold:#D9B310;
+      --bg:#FAF7F3;
+      --text:#222;
+      --muted:#666;
+    }
+
+    body{
+      margin:0;
+      font-family:"Open Sans", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Modo oscuro */
+    body.dark {
+      --bg:#121212;
+      --text:#eaeaea;
+      --muted:#aaa;
+      --navy:#1c1f26;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      background:var(--navy);
+      color:white;
+      padding:16px 0;
+      position:relative;
+    }
+
+    .wrap{
+      width:92%;
+      max-width:800px;
+      margin:0 auto;
+    }
+
+    .brand{
+      font-family:"Playfair Display", serif;
+      font-size:20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing:0.03em;
+    }
+
+    nav{
+      margin-top:8px;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-right:18px;
+      font-weight:600;
+    }
+
+    /* Botón modo oscuro */
+    #darkModeBtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    #darkModeBtn:hover {
+      opacity: 0.85;
+    }
+
+    h1 {
+      font-family:"Playfair Display", serif;
+      font-size:34px;
+      margin-top:32px;
+      color:var(--navy);
+    }
+
+    h2 {
+      font-family:"Playfair Display", serif;
+      font-size:22px;
+      margin-top:24px;
+      color:var(--navy);
+    }
+
+    .signature{
+      margin-top:36px;
+      font-style:italic;
+      color:var(--muted);
+    }
+
+    footer{
+      background:var(--navy);
+      color:#fff;
+      text-align:center;
+      padding:22px 0;
+      margin-top:48px;
+      font-size:14px;
+    }
+
+    a{color:var(--navy);}
+  </style>
+</head>
+<body>
+
+<header>
+  <button id="translateBtn">🌐 ES</button>
+  <button id="darkModeBtn">🌙</button>
+  <div class="wrap">
+    <div class="brand">
+      <div><strong>BH</strong></div>
+      <div>
+        <div>Berkshire Hathaway Inc.</div>
+        <small>Official Home Page</small>
+      </div>
+    </div>
+    <nav>
+      <a href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\index.html">Home</a>
+      <a href="#">Reports</a>
+      <a href="#">Letters</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>A Message From Warren E. Buffett</h1>
+  <h2>CEO of Berkshire Hathaway Inc.</h2>
+
+  <p><strong>Dear Reader,</strong></p>
+  <p>You probably know that I don't make stock recommendations. However, I have two thoughts regarding your personal expenditures that can save you real money. I'm suggesting that you call on the services of two subsidiaries of Berkshire: <strong>GEICO</strong> and <strong>Borsheim's</strong>.</p>
+  <p>I estimate that about 40% of all auto drivers in the country can save money by insuring with GEICO. [...] <a href="https://www.geico.com" target="_blank">www.geico.com</a> or call <strong>800-555-2756</strong>.</p>
+  <p>Fine jewelry, watches and giftware will almost certainly cost you less at Borsheim's. [...] <strong>800-642-4438</strong>.</p>
+  <p class="signature">Sincerely,<br>Warren E. Buffett</p>
+</main>
+
+<footer>
+  © 2026 Berkshire Hathaway Inc. | 3555 Farnam Street, Omaha, NE 68131
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('darkModeBtn');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+
+   // Translate
+  document.getElementById("translateBtn").addEventListener("click", function(){
+    window.location.href = "https://translate.google.com/translate?sl=auto&tl=es&u=" + encodeURIComponent(window.location.href);
+  });
+</script>
+
+</body>
+</html>

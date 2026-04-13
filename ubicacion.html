@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Location | Berkshire Hathaway Inc.</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    #translateBtn {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  background: #D9B310;
+  color: #0B3C5D;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+    :root {
+      --navy: #0B3C5D;
+      --gold: #D9B310;
+      --bg: #FAF7F3;
+      --text: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    .wrap {
+      width: 94%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #darkModeBtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: var(--gold);
+      border: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      color: var(--navy);
+    }
+
+    .map-container {
+      margin-top: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg: #121212;
+      --text: #eaeaea;
+      --navy: #1c1f26;
+    }
+
+    body.dark h1 {
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <button id="translateBtn">🌐 ES</button>
+  <button id="darkModeBtn">🌙</button>
+  <div class="wrap header-inner">
+    <div><strong>BH</strong> Berkshire Hathaway Inc.</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="acercade.html">About</a>
+      <a href="contacto.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Our Location</h1>
+  <p>3555 Farnam Street, Omaha, Nebraska, USA</p>
+
+  <div class="map-container">
+    <iframe 
+      src="https://maps.google.com/maps?q=3555%20Farnam%20Street%20Omaha&t=&z=15&ie=UTF8&iwloc=&output=embed">
+    </iframe>
+  </div>
+</main>
+
+<footer>
+  © 2026 Berkshire Hathaway Inc.
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('darkModeBtn');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+  
+   // Translate
+  document.getElementById("translateBtn").addEventListener("click", function(){
+    window.location.href = "https://translate.google.com/translate?sl=auto&tl=es&u=" + encodeURIComponent(window.location.href);
+  });
+</script>
+
+</body>
+</html>

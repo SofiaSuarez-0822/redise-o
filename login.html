@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | Berkshire Hathaway Inc.</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0B3C5D;
+      --gold: #D9B310;
+      --bg: #FAF7F3;
+      --text: #222;
+      --muted: #6b6b6b;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    .wrap {
+      width: 94%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #darkModeBtn, #langBtn {
+      position: absolute;
+      top: 10px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #darkModeBtn { right: 20px; background: var(--gold); }
+    #langBtn { right: 80px; background: var(--gold); }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      color: var(--navy);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    #mensaje {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #eee;
+      --navy: #1c1f26;
+    }
+
+    body.dark .login-box {
+      background: #1f1f1f;
+    }
+
+    body.dark h1 {
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <button id="langBtn">ES</button>
+  <button id="darkModeBtn">🌙</button>
+
+  <div class="wrap header-inner">
+    <div><strong>BH</strong> Berkshire Hathaway Inc.</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contacto.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="login-box">
+
+    <h1 data-en="Login" data-es="Iniciar Sesión">Login</h1>
+
+    <!-- LOGIN -->
+    <form onsubmit="return login(event)">
+      <input type="email" id="correo"
+        placeholder="Email address"
+        data-en="Email address"
+        data-es="Correo electrónico"
+        required>
+
+      <input type="password" id="password"
+        placeholder="Password"
+        data-en="Password"
+        data-es="Contraseña"
+        required>
+
+      <button type="submit"
+        data-en="Sign In"
+        data-es="Ingresar">
+        Sign In
+      </button>
+    </form>
+
+    <!-- MFA -->
+    <div id="mfaSection" style="display:none;">
+      <h3 data-en="Enter verification code" data-es="Ingresa el código de verificación">
+        Enter verification code
+      </h3>
+
+      <input type="text" id="codigo" placeholder="6-digit code">
+
+      <button onclick="verificarCodigo()"
+        data-en="Verify"
+        data-es="Verificar">
+        Verify
+      </button>
+    </div>
+
+    <p id="mensaje"></p>
+
+    <p>
+      <a href="recuperar.html"
+        data-en="Forgot password?"
+        data-es="¿Olvidaste tu contraseña?">
+        Forgot password?
+      </a>
+    </p>
+
+  </div>
+</main>
+
+<script src="usuarios.js"></script>
+
+<script>
+// 🌐 Traducción
+let idioma = "en";
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  idioma = idioma === "en" ? "es" : "en";
+
+  document.querySelectorAll("[data-en]").forEach(el => {
+    if(el.placeholder){
+      el.placeholder = el.getAttribute("data-" + idioma);
+    } else {
+      el.textContent = el.getAttribute("data-" + idioma);
+    }
+  });
+
+  document.getElementById("langBtn").textContent = idioma === "en" ? "ES" : "EN";
+});
+
+// 🌙 Dark mode
+document.getElementById("darkModeBtn").onclick = () => {
+  document.body.classList.toggle("dark");
+};
+
+// 🔐 MFA
+let usuarioTemp = null;
+let codigoGenerado = null;
+
+function login(event){
+  event.preventDefault();
+
+  const correo = document.getElementById("correo").value;
+  const password = document.getElementById("password").value;
+  const mensaje = document.getElementById("mensaje");
+
+  const usuario = usuarios.find(u => 
+    u.correo === correo && u.password === password
+  );
+
+  if(usuario){
+    usuarioTemp = usuario;
+
+    codigoGenerado = Math.floor(100000 + Math.random() * 900000);
+
+    mensaje.innerHTML = `
+      📧 ${idioma === "en" ? "Verification code sent" : "Código enviado"} <br>
+      <strong>${codigoGenerado}</strong>
+    `;
+
+    document.getElementById("mfaSection").style.display = "block";
+
+  } else {
+    mensaje.textContent = idioma === "en"
+      ? "Incorrect email or password"
+      : "Correo o contraseña incorrectos";
+  }
+
+  return false;
+}
+
+function verificarCodigo(){
+  const codigoIngresado = document.getElementById("codigo").value;
+  const mensaje = document.getElementById("mensaje");
+
+  if(codigoIngresado == codigoGenerado){
+    localStorage.setItem("usuario", JSON.stringify(usuarioTemp));
+
+    mensaje.textContent = idioma === "en"
+      ? "Login successful"
+      : "Inicio de sesión exitoso";
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
+
+  } else {
+    mensaje.textContent = idioma === "en"
+      ? "Invalid code"
+      : "Código incorrecto";
+  }
+}
+</script>
+
+</body>
+</html>

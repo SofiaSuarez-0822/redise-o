@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Berkshire Hathaway Inc. — Official Home Page</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    #contrastBtn, #fontBtn, #voiceBtn {
+  position:absolute;
+  top:10px;
+  padding:6px 10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+  background:#D9B310;
+  color:#0B3C5D;
+}
+
+#contrastBtn { right:700px; }
+#fontBtn { right:750px; }
+#voiceBtn { right:800px; }
+
+/* Alto contraste */
+body.contrast {
+  background:black !important;
+  color:white !important;
+}
+
+body.contrast .card,
+body.contrast .message-box {
+  background:black !important;
+  color:white !important;
+  border:1px solid white;
+}
+
+#translateBtn {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+  background: #D9B310;
+  color: #0B3C5D;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+
+    /* ===== Variables / Palette ===== */
+    :root{
+      --navy: #0B3C5D;
+      --gold: #D9B310;
+      --bg: #FAF7F3;
+      --text: #222222;
+      --muted: #6b6b6b;
+      --card-shadow: 0 6px 18px rgba(11,60,93,0.08);
+      --radius: 10px;
+      --max-width: 1100px;
+    }
+
+    /* ===== Reset / base ===== */
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.45;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* ===== Container ===== */
+    .wrap{
+      width: 94%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ===== Header ===== */
+    header{
+      background:linear-gradient(180deg, rgba(11,60,93,0.98), rgba(11,60,93,0.98));
+      color:white;
+      padding:18px 0;
+      position:relative;
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      font-family:"Playfair Display", serif;
+      letter-spacing:0.04em;
+      font-size:20px;
+      color: #fff;
+    }
+    .brand .logo-mark{
+      width:46px;
+      height:46px;
+      border-radius:6px;
+      background:linear-gradient(180deg,#163a57,#0b304a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      font-weight:700;
+      color:#fff;
+      font-family: "Montserrat", sans-serif;
+      font-size:18px;
+    }
+
+    nav ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      gap:22px;
+      align-items:center;
+      font-weight:600;
+      font-size:15px;
+    }
+    nav a{ color: #fff; opacity:0.95 }
+    nav a:hover{ opacity:1; text-decoration:underline }
+
+    /* ===== Hero ===== */
+    .hero{
+      background-image: linear-gradient(rgba(11,60,93,0.55), rgba(11,60,93,0.55)), url("https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600&auto=format&fit=crop&crop=entropy");
+      background-size:cover;
+      background-position: center;
+      color: #fff;
+      padding:64px 0 48px;
+      margin-bottom:28px;
+    }
+    .hero .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:20px;
+      align-items:center;
+    }
+    .hero h1{
+      font-family:"Playfair Display", serif;
+      margin:0 0 8px 0;
+      font-size:44px;
+      line-height:1.04;
+    }
+    .hero p.lead{
+      margin:0 0 18px 0;
+      font-size:18px;
+      font-weight:400;
+      opacity:0.95;
+    }
+    .btn-primary{
+      display:inline-block;
+      background:var(--gold);
+      color:var(--navy);
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:700;
+      font-family:"Montserrat",sans-serif;
+      box-shadow: 0 6px 14px rgba(11,60,93,0.16);
+    }
+
+    /* ===== Cards grid ===== */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+      margin-top:-36px;
+    }
+    .card{
+      background:#fff;
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--card-shadow);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      transition: background 0.3s, color 0.3s;
+    }
+    .card .icon{
+      min-width:42px;
+      min-height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(217,179,16,0.09), rgba(217,179,16,0.06));
+      color:var(--gold);
+      font-size:20px;
+    }
+    .card h3{margin:0 0 6px 0;font-size:18px;font-weight:600}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* ===== Message section ===== */
+    .message-section{
+      margin:48px 0;
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap:22px;
+      align-items:center;
+    }
+    .message-photo{
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:var(--card-shadow);
+    }
+    .message-box{
+      background:#fff;
+      padding:26px;
+      border-radius:12px;
+      box-shadow:var(--card-shadow);
+      transition: background 0.3s, color 0.3s;
+    }
+    .message-box h2{
+      font-family:"Playfair Display",serif;
+      margin:0 0 10px 0;
+      font-size:26px;
+    }
+    .message-box p{ color:var(--muted); margin:0 0 16px 0; font-size:15px }
+    .message-box .btn-cta{ background:var(--gold); color:var(--navy); padding:10px 16px; border-radius:8px; font-weight:700; text-decoration:none }
+
+    /* ===== Footer ===== */
+    footer{
+      background:var(--navy);
+      color:#fff;
+      padding:28px 0;
+      margin-top:40px;
+    }
+    footer .footer-inner{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-items:center;
+      text-align:center;
+      font-size:14px;
+    }
+
+    /* ===== Botón de modo oscuro ===== */
+    #darkModeBtn {
+      position:absolute;
+      top:10px;
+      right:20px;
+      background:var(--gold);
+      color:var(--navy);
+      border:none;
+      padding:6px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      font-family:"Montserrat",sans-serif;
+      transition:all 0.3s;
+    }
+    #darkModeBtn:hover {opacity:0.85;}
+
+    /* ===== Modo oscuro general ===== */
+    body.dark {
+      --bg: #121212;
+      --text: #eaeaea;
+      --muted: #aaaaaa;
+      background: var(--bg);
+      color: var(--text);
+    }
+    body.dark .card, body.dark .message-box {
+      background: #1f1f1f;
+      color: var(--text);
+    }
+    body.dark header, body.dark footer {
+      background: #0a0a0a;
+    }
+
+    @media (max-width:980px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .message-section{grid-template-columns:1fr}
+      .message-photo{order:-1}
+    }
+    @media (max-width:600px){
+      .brand{font-size:16px}
+      .hero h1{font-size:30px}
+      nav ul{gap:12px;font-size:13px}
+      .cards{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <button id="translateBtn">🌐 ES</button>
+    <button id="darkModeBtn">🌙</button>
+    <div class="wrap header-inner">
+      <div class="brand">
+        <div class="logo-mark">BH</div>
+        <div>
+          <div style="font-size:14px; opacity:0.9">Berkshire Hathaway Inc.</div>
+          <div style="font-size:12px; opacity:0.85">Official Home Page</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <button id="contrastBtn">🌓</button>
+<button id="fontBtn">A+</button>
+<button id="voiceBtn">🔊</button>
+          <li><a href="#">Home</a></li>
+          <li><a href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\acercade.html">About</a></li>
+          <li><a href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\vision.html">Vision</a></li>
+          <li><a href="tienda.html">Shop</a></li>
+          <li><a href="#">Companies</a></li>
+          <li><a href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\contanco.html">Contact</a></li>
+          <li><a href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\ubicacion.html">Location</a></li>
+          <li><a href="login.html">Close</a></li>
+        
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <h1>Berkshire Hathaway Inc.</h1>
+        <p class="lead">Building value through vision and integrity.</p>
+        <a class="btn-primary" href="#buffett-message">A Message from Warren E. Buffett</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido principal -->
+  <main class="wrap">
+
+    <section id="buffett-message" class="message-section">
+      <div class="message-photo">
+        <img src="C:\Users\Sofia\OneDrive\Desktop\Rediseño\que-hace-un-abogado.png" alt="Portrait" />
+      </div>
+
+      <div class="message-box">
+        <h2>A Message from Warren E. Buffett</h2>
+        <p>Dear Berkshire Hathaway Shareholders,</p>
+        <p>In our annual letters to shareholders, Charlie Munger and I take pleasure in communicating directly with you. We believe in transparent, thoughtful discussion of our successes and our mistakes, always working in the best interest of our shareholders.</p>
+        <p><a class="btn-cta" href="C:\Users\Sofia\OneDrive\Desktop\Rediseño\mensaje.html">Read the full message</a></p>
+      
+      <!-- 🔍 NUEVO BUSCADOR -->
+      <div style="margin-top:20px;">
+        <input id="busqueda" type="text" placeholder="Search page..." 
+          style="padding:10px; border-radius:6px; border:none; width:250px;">
+        
+        <button onclick="buscar()" 
+          style="padding:10px; border:none; border-radius:6px; background:#D9B310; cursor:pointer;">
+          Search
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div style="font-family:'Playfair Display', serif; font-size:18px;">© 2026 Berkshire Hathaway Inc.</div>
+      <div>3555 Farnam Street, Omaha, NE 68131 | All rights reserved.</div>
+      <div>
+        <a href="#">Official Home Page</a> &nbsp; | &nbsp;
+        <a href="#">Contact</a> &nbsp; | &nbsp;
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script para activar el modo oscuro -->
+  <script>
+    const toggleBtn = document.getElementById('darkModeBtn');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+ 
+function traducirPagina() {
+  let lang = "es";
+  window.location.href = "https://translate.google.com/translate?sl=auto&tl=" + lang + "&u=" + encodeURIComponent(window.location.href);
+}
+
+document.getElementById("translateBtn").addEventListener("click", traducirPagina);
+
+
+// 🔎 BUSCADOR
+function buscar(){
+  const texto = document.getElementById("busqueda").value.toLowerCase();
+
+  if(texto.includes("about")){
+    window.location.href = "acercade.html";
+  }
+  else if(texto.includes("vision")){
+    window.location.href = "vision.html";
+  }
+  else if(texto.includes("shop") || texto.includes("tienda")){
+    window.location.href = "tienda.html";
+  }
+  else if(texto.includes("contact")){
+    window.location.href = "contacto.html";
+  }
+  else if(texto.includes("location")){
+    window.location.href = "ubicacion.html";
+  }
+  else if(texto.includes("login")){
+    window.location.href = "login.html";
+  }
+  else if(texto.includes("message")){
+    window.location.href = "mensaje.html";
+  }
+  else{
+    alert("Page not found");
+  }
+}
+
+// ♿ ALTO CONTRASTE
+document.getElementById("contrastBtn").onclick = () => {
+  document.body.classList.toggle("contrast");
+};
+
+// 🔠 AUMENTAR TEXTO
+let fontSize = 16;
+
+document.getElementById("fontBtn").onclick = () => {
+  fontSize += 2;
+  document.body.style.fontSize = fontSize + "px";
+};
+
+// 🔊 LECTOR DE TEXTO
+document.getElementById("voiceBtn").onclick = () => {
+  const texto = document.body.innerText;
+  const speech = new SpeechSynthesisUtterance(texto);
+  speech.lang = "en-US"; // puedes cambiar a es-ES
+  speech.rate = 1;
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(speech);
+};
+
+
+</script>
+
+</body>
+</html>

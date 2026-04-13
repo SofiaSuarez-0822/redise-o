@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>Berkshire Hathaway Inc. — Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0B3C5D;
+  --gold:#D9B310;
+  --bg:#FAF7F3;
+  --text:#222;
+}
+
+body{
+  margin:0;
+  font-family:"Open Sans",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  background:var(--navy);
+  color:white;
+  padding:15px;
+  position:relative;
+}
+
+nav a{
+  color:white;
+  margin-left:15px;
+  text-decoration:none;
+}
+
+#langBtn, #darkModeBtn{
+  position:absolute;
+  top:10px;
+  padding:5px 10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#langBtn{ right:80px; background:var(--gold);}
+#darkModeBtn{ right:20px; background:var(--gold);}
+
+/* HERO */
+.hero{
+  background:linear-gradient(rgba(11,60,93,0.6), rgba(11,60,93,0.6)),
+  url("https://images.unsplash.com/photo-1521791136064-7986c2920216");
+  background-size:cover;
+  color:white;
+  text-align:center;
+  padding:80px 20px;
+}
+
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:40px;
+}
+
+.search-box{
+  margin-top:20px;
+}
+
+.search-box input{
+  padding:10px;
+  width:260px;
+  border-radius:6px;
+  border:none;
+}
+
+.search-box button{
+  padding:10px;
+  background:var(--gold);
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding:40px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card a{
+  display:block;
+  margin-top:10px;
+  color:var(--navy);
+  font-weight:bold;
+}
+
+footer{
+  background:var(--navy);
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+/* DARK MODE */
+body.dark{
+  --bg:#121212;
+  --text:#eee;
+  --navy:#1c1f26;
+}
+
+body.dark .card{
+  background:#1f1f1f;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<button id="langBtn">ES</button>
+<button id="darkModeBtn">🌙</button>
+
+<strong>Berkshire Hathaway</strong>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="acercade.html">About</a>
+  <a href="contacto.html">Contact</a>
+  <a href="login.html">Login</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+<h1 data-en="Berkshire Hathaway Inc." data-es="Berkshire Hathaway Inc.">
+Berkshire Hathaway Inc.
+</h1>
+
+<p data-en="Building value through vision and integrity."
+   data-es="Construyendo valor con visión e integridad.">
+Building value through vision and integrity.
+</p>
+
+<!-- 🔎 BUSCADOR -->
+<div class="search-box">
+  <input type="text" id="busqueda" placeholder="Search page...">
+  <button onclick="buscar()">Search</button>
+</div>
+
+</section>
+
+<!-- CARDS -->
+<section class="cards">
+
+<div class="card">
+  <h3>About</h3>
+  <a href="acercade.html">Go</a>
+</div>
+
+<div class="card">
+  <h3>Contact</h3>
+  <a href="contacto.html">Go</a>
+</div>
+
+<div class="card">
+  <h3>Login</h3>
+  <a href="login.html">Go</a>
+</div>
+
+<div class="card">
+  <h3>Store</h3>
+  <a href="tienda.html">Go</a>
+</div>
+
+<div class="card">
+  <h3>Mission & Vision</h3>
+  <a href="mision.html">Go</a>
+</div>
+
+<div class="card">
+  <h3>Message</h3>
+  <a href="mensaje.html">Go</a>
+</div>
+
+</section>
+
+<footer>
+© 2026 Berkshire Hathaway Inc.
+</footer>
+
+<script>
+// 🌐 Traducción
+let idioma = "en";
+
+document.getElementById("langBtn").onclick = () => {
+  idioma = idioma === "en" ? "es" : "en";
+
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.textContent = el.getAttribute("data-" + idioma);
+  });
+
+  document.getElementById("langBtn").textContent = idioma === "en" ? "ES" : "EN";
+};
+
+// 🌙 Dark mode
+document.getElementById("darkModeBtn").onclick = () => {
+  document.body.classList.toggle("dark");
+};
+
+// 🔎 BUSCADOR
+function buscar(){
+  const texto = document.getElementById("busqueda").value.toLowerCase();
+
+  if(texto.includes("contact")){
+    window.location.href = "contacto.html";
+  }
+  else if(texto.includes("login")){
+    window.location.href = "login.html";
+  }
+  else if(texto.includes("store") || texto.includes("tienda")){
+    window.location.href = "tienda.html";
+  }
+  else if(texto.includes("about")){
+    window.location.href = "acercade.html";
+  }
+  else if(texto.includes("mission") || texto.includes("mision")){
+    window.location.href = "mision.html";
+  }
+  else if(texto.includes("message")){
+    window.location.href = "mensaje.html";
+  }
+  else{
+    alert(idioma === "en" ? "Page not found" : "Página no encontrada");
+  }
+}
+</script>
+
+</body>
+</html>

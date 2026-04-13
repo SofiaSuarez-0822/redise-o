@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Store | Berkshire Hathaway</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0B3C5D;
+  --gold:#D9B310;
+  --bg:#FAF7F3;
+  --text:#222;
+}
+
+body{
+  margin:0;
+  font-family:"Open Sans",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  background:var(--navy);
+  color:white;
+  padding:15px;
+  position:relative;
+}
+
+nav a{
+  color:white;
+  margin-left:15px;
+  text-decoration:none;
+}
+
+#langBtn, #darkModeBtn{
+  position:absolute;
+  top:10px;
+  padding:5px 10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#langBtn{ right:80px; background:var(--gold);}
+#darkModeBtn{ right:20px; background:var(--gold);}
+
+main{
+  padding:40px;
+  text-align:center;
+}
+
+.product, .cart{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  max-width:350px;
+  margin:20px auto;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+input{
+  width:90%;
+  padding:8px;
+  margin:5px 0;
+}
+
+button{
+  background:var(--navy);
+  color:white;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+  border-radius:6px;
+  margin-top:5px;
+}
+
+body.dark{
+  --bg:#121212;
+  --text:#eee;
+  --navy:#1c1f26;
+}
+
+body.dark .product,
+body.dark .cart{
+  background:#1f1f1f;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<button id="langBtn">ES</button>
+<button id="darkModeBtn">🌙</button>
+
+<strong>BH Store</strong>
+<nav>
+  <a href="index.html">Home</a>
+</nav>
+</header>
+
+<main>
+
+<h1 data-en="Investment Book Store" data-es="Tienda de Libros de Inversión">
+Investment Book Store
+</h1>
+
+<!-- 📚 PRODUCTO -->
+<div class="product">
+
+  <h2 id="bookName"></h2>
+  <p id="bookPrice"></p>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" style="display:none;">
+    <input type="text" id="newName" placeholder="New book name">
+    <input type="number" id="newPrice" placeholder="New price">
+    <button onclick="updateProduct()">Update</button>
+  </div>
+
+  <button onclick="addToCart()"
+    data-en="Add to Cart"
+    data-es="Agregar al carrito">
+    Add to Cart
+  </button>
+
+</div>
+
+<!-- 🛒 CARRITO -->
+<div class="cart">
+  <h3 data-en="Shopping Cart" data-es="Carrito de Compras">
+    Shopping Cart
+  </h3>
+
+  <p id="cartItems">0 items</p>
+  <p id="cartTotal">Total: $0.00</p>
+
+  <button onclick="checkout()"
+    data-en="Checkout"
+    data-es="Comprar">
+    Checkout
+  </button>
+
+  <button onclick="removeFromCart()"
+    data-en="Remove item"
+    data-es="Quitar producto">
+    Remove item
+  </button>
+
+</div>
+
+</main>
+
+<script>
+// 🌐 Traducción
+let idioma = "en";
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  idioma = idioma === "en" ? "es" : "en";
+
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.textContent = el.getAttribute("data-" + idioma);
+  });
+
+  document.getElementById("langBtn").textContent = idioma === "en" ? "ES" : "EN";
+
+  actualizarCarrito();
+  renderProducto();
+});
+
+// 🌙 Dark mode
+document.getElementById("darkModeBtn").onclick = () => {
+  document.body.classList.toggle("dark");
+};
+
+// 📦 Producto
+let producto = JSON.parse(localStorage.getItem("producto")) || {
+  nombre: "The Intelligent Investor",
+  precio: 20
+};
+
+// 👤 Usuario
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+// Mostrar producto
+function renderProducto(){
+  document.getElementById("bookName").textContent = producto.nombre;
+  document.getElementById("bookPrice").textContent =
+    (idioma === "en" ? "Price: $" : "Precio: $") + producto.precio;
+}
+
+// Panel admin
+if(usuario && usuario.rol === "admin"){
+  document.getElementById("adminPanel").style.display = "block";
+}
+
+// Actualizar producto
+function updateProduct(){
+  const newName = document.getElementById("newName").value;
+  const newPrice = document.getElementById("newPrice").value;
+
+  if(newName) producto.nombre = newName;
+  if(newPrice) producto.precio = parseFloat(newPrice);
+
+  localStorage.setItem("producto", JSON.stringify(producto));
+
+  renderProducto();
+  alert(idioma === "en" ? "Product updated" : "Producto actualizado");
+}
+
+// 🛒 Carrito
+let cartCount = 0;
+let total = 0;
+
+function addToCart(){
+  cartCount++;
+  total += producto.precio;
+  actualizarCarrito();
+}
+
+function removeFromCart(){
+  if(cartCount > 0){
+    cartCount--;
+    total -= producto.precio;
+
+    if(total < 0) total = 0;
+
+    actualizarCarrito();
+  } else {
+    alert(idioma === "en" ? "Cart is already empty" : "El carrito ya está vacío");
+  }
+}
+
+// Actualizar vista
+function actualizarCarrito(){
+  document.getElementById("cartItems").textContent =
+    cartCount + (idioma === "en" ? " item(s)" : " producto(s)");
+
+  document.getElementById("cartTotal").textContent =
+    (idioma === "en" ? "Total: $" : "Total: $") + total.toFixed(2);
+}
+
+// Comprar
+function checkout(){
+  if(cartCount === 0){
+    alert(idioma === "en" ? "Cart is empty" : "El carrito está vacío");
+  } else {
+    alert(
+      (idioma === "en" ? "Total paid: $" : "Total pagado: $") + total.toFixed(2)
+    );
+
+    cartCount = 0;
+    total = 0;
+    actualizarCarrito();
+  }
+}
+
+// Inicializar
+renderProducto();
+actualizarCarrito();
+</script>
+
+</body>
+</html>
